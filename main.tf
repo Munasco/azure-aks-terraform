@@ -21,7 +21,7 @@ provider "azurerm" {
 resource "azurerm_resource_group" "aks_rg" {
   name     = "rg-aks-${random_string.suffix.result}"
   location = var.location
-  
+
   tags = {
     Environment = "Development"
     Project     = "AKS-Terraform"
@@ -47,16 +47,16 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name       = "default"
     node_count = var.node_count
     vm_size    = var.vm_size
-    
+
     # Enable auto-scaling (optional)
     enable_auto_scaling = var.enable_auto_scaling
-    min_count          = var.min_count
-    max_count          = var.max_count
-    
+    min_count           = var.min_count
+    max_count           = var.max_count
+
     # Node pool configuration
     os_disk_size_gb = 30
     type            = "VirtualMachineScaleSets"
-    
+
     tags = {
       Environment = "Development"
       NodePool    = "default"
@@ -78,7 +78,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   # Network configuration
   network_profile {
-    network_plugin = var.network_plugin
+    network_plugin    = var.network_plugin
     load_balancer_sku = "standard"
   }
 
